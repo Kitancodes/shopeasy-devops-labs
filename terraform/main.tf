@@ -120,18 +120,14 @@ resource "aws_instance" "web" {
   user_data = <<-EOF
     #!/bin/bash
     # Create the user and give them a home folder
-    useradd -m -s /bin/bash ${var.vm_username}
+    useradd -m -s /bin/bash Olakitan || true
     # Set the password
-    echo "${var.vm_username}:${var.vm_password}" | chpasswd
+    echo "Olakitan:Olakitan123" | chpasswd
     # Add the user to the sudo group (superuser rights)
-    usermod -aG sudo ${var.vm_username}
-    # Ubuntu blocks SSH password login by default - turn it on.
-    # The file name starts with 01 so it is read before Ubuntu's own settings.
-    echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/01-password-auth.conf
-    systemctl restart ssh
-    dnf install -y nginx
-    systemctl enable --now nginx
-  EOF
+    echo "Olakitan ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/90-cloud-init-users
+    echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/01-permit-password.conf
+    systemctl restart sshd || systemctl restart ssh
+    EOF
 
   # If you change the script, recreate the instance so it runs again
   user_data_replace_on_change = true
