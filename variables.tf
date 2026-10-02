@@ -38,7 +38,6 @@ variable "instance_type" {
   default     = "t3.micro"
 }
 
-# No default on purpose: the values are read from environment variables
 # named TF_VAR_vm_username and TF_VAR_vm_password (see instructions)
 variable "vm_username" {
   description = "Username to create on the server"
