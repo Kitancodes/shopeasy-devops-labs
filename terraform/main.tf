@@ -129,6 +129,8 @@ resource "aws_instance" "web" {
     # The file name starts with 01 so it is read before Ubuntu's own settings.
     echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/01-password-auth.conf
     systemctl restart ssh
+    dnf install -y nginx
+    systemctl enable --now nginx
   EOF
 
   # If you change the script, recreate the instance so it runs again

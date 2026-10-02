@@ -17,7 +17,7 @@ variable "availability_zone" {
 variable "project_name" {
   description = "Prefix used to name all resources"
   type        = string
-  default     = "terraform-lab"
+  default     = "lab-test-olakitan"
 }
 
 variable "vpc_cidr" {

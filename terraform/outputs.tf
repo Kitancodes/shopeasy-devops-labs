@@ -1,3 +1,4 @@
+
 # ---------------------------------------------------------------
 # outputs.tf - values Terraform prints after `terraform apply`
 # ---------------------------------------------------------------
@@ -16,4 +17,9 @@ output "security_group_name" {
 output "elastic_ip" {
   description = "Public Elastic IP of the EC2 instance"
   value       = aws_eip.web.public_ip
+}
+
+output "public_dns" {
+  description = "Public DNS name of the EC2 instance"
+  value       = aws_instance.web.public_dns
 }
